@@ -27,10 +27,8 @@ module InvadersScanner
       check_char_map
       raise UnknownCharError if string.match?(/[^#{allowed_chars.join}]/)
 
-      char_map.each do |from_char, to_char|
-        replace_string(from_char, to_char)
-      end
-      split_by_line
+      char_map.inject(string) { |str, (from_char, to_char)| replace_string(str, from_char, to_char) }
+              .split(end_line_char)
     end
 
     private
@@ -54,12 +52,8 @@ module InvadersScanner
       end
     end
 
-    def split_by_line
-      string.split(end_line_char)
-    end
-
-    def replace_string(from, to)
-      string.gsub!(from, to)
+    def replace_string(string, from, to)
+      string.gsub(from, to)
     end
   end
 end

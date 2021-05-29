@@ -4,7 +4,7 @@ module InvadersScanner
   class Area
     class OutOfAreaException < StandardError; end
 
-    attr_reader :array_value
+    attr_reader :array_value, :min_coordinate
 
     def self.from_string(string, converter: StringToBinaryConverter)
       Area.new(converter.new(string: string).call)
@@ -13,7 +13,6 @@ module InvadersScanner
     def initialize(array_value, start_coordinate: Coordinate.new(0, 0))
       @array_value = array_value
       @min_coordinate = start_coordinate
-      @comparator = comparator
     end
 
     def max_coordinate
@@ -38,8 +37,6 @@ module InvadersScanner
     end
 
     private
-
-    attr_reader :min_coordinate, :comparator
 
     def width_size
       array_value.map { |elem| elem.chars.count }

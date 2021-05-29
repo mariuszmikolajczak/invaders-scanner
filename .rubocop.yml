@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 Layout/LineLength:
   Max: 120
 
@@ -41,5 +43,7 @@ AllCops:
   EnabledByDefault: true
   SuggestExtensions: false
   Exclude:
-    - 'spec/**/*'
     - 'bin/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/**/*'
+
