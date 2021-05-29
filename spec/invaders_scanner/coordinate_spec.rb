@@ -54,4 +54,28 @@ describe InvadersScanner::Coordinate do
   it 'should be able to tell that is equal' do
     expect(coordinate).to eq(another_equal_coordinate)
   end
+
+  it 'should raise error when until coordination is smaller' do
+    expect {
+      coordinate.each_until(described_class.new(0, 0))
+    }.to raise_error InvadersScanner::Coordinate::UnexpectedUntilCoordinate
+  end
+
+  it 'should iterate to given point' do
+    result = []
+    coordinate.each_until(described_class.new(25, 35)) do |cord|
+      result.push(cord)
+    end
+
+    expected_arry = [
+      described_class.new(23, 34),
+      described_class.new(24, 34),
+      described_class.new(25, 34),
+      described_class.new(23, 35),
+      described_class.new(24, 35),
+      described_class.new(25, 35)
+    ]
+
+    expect(result).to eq(expected_arry)
+  end
 end

@@ -2,6 +2,8 @@
 
 module InvadersScanner
   class Coordinate
+    class UnexpectedUntilCoordinate < StandardError; end
+
     include Comparable
 
     attr_accessor :x_param, :y_param
@@ -30,6 +32,17 @@ module InvadersScanner
         1
       else
         -1
+      end
+    end
+
+    # Iterates until reaches coordinate
+    def each_until(coordinate)
+      raise UnexpectedUntilCoordinate if coordinate < self
+
+      (y_param..coordinate.y).each do |j|
+        (x_param..coordinate.x).each do |i|
+          yield(Coordinate.new(i, j))
+        end
       end
     end
   end
