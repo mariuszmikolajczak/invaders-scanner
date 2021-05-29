@@ -2,17 +2,19 @@
 
 module InvadersScanner
   class Match
-    def initialize(matched_chunk:, similarity:)
-      @matched_chunk = matched_chunk
+    attr_reader :similarity
+
+    def initialize(chunk:, similarity:)
+      @chunk = chunk
       @similarity = similarity
     end
 
     def coordinates
-      [matched_chunk.min_coordinate, matched_chunk.max_coordinate]
+      [chunk.min_coordinate, chunk.max_coordinate]
     end
 
     private
 
-    attr_reader :matched_chunk, :similarity
+    attr_reader :chunk
   end
 end

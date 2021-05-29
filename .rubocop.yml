@@ -35,6 +35,14 @@ RSpec/MultipleMemoizedHelpers:
   Exclude:
     - 'spec/**/*'
 
+RSpec/AlignLeftLetBrace:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/AlignRightLetBrace:
+  Exclude:
+    - 'spec/**/*'
+
 AllCops:
   EnabledByDefault: true
   SuggestExtensions: false

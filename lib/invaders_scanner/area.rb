@@ -16,6 +16,10 @@ module InvadersScanner
     end
 
     def max_coordinate
+      min_coordinate + size_coordinate
+    end
+
+    def size_coordinate
       Coordinate.new(width_size - 1, height_size - 1)
     end
 
