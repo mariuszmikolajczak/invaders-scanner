@@ -14,6 +14,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'simplecov'
+SimpleCov.start
+
 require 'invaders_scanner'
 
 RSpec.configure do |config|

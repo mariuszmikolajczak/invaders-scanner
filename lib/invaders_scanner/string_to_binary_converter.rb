@@ -27,7 +27,7 @@ module InvadersScanner
       check_char_map
       raise UnknownCharError if string.match?(/[^#{allowed_chars.join}]/)
 
-      char_map.inject(string) { |str, (from_char, to_char)| replace_string(str, from_char, to_char) }
+      char_map.reduce(string) { |str, (from_char, to_char)| replace_string(str, from_char, to_char) }
               .split(end_line_char)
     end
 
