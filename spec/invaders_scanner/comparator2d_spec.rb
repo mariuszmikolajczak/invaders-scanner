@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe InvadersScanner::Comparator2d do
-
   subject(:comparator) { described_class }
 
   context 'when arrays are the same' do
@@ -11,14 +12,14 @@ describe InvadersScanner::Comparator2d do
         %w[11111111],
         %w[01010101],
         %w[10101010],
-        %w[11111111, 00000000],
-        %w[00000000, 11111111],
-        %w[10101010, 01010101],
+        %w[11111111 00000000],
+        %w[00000000 11111111],
+        %w[10101010 01010101],
         %w[10101010 01010101 11100111 00011000]
       ]
     end
 
-    it 'should return 100' do
+    it 'returns 100' do
       arrays.each do |array|
         expect(comparator.new(array, array).call).to eq(100)
       end
@@ -35,7 +36,7 @@ describe InvadersScanner::Comparator2d do
       }
     end
 
-    it 'should return 0' do
+    it 'returns 0' do
       arrays.each do |first_arry, second_arry|
         expect(comparator.new(first_arry, second_arry).call).to eq(0)
       end
@@ -53,7 +54,7 @@ describe InvadersScanner::Comparator2d do
       ]
     end
 
-    it 'should return similarity' do
+    it 'returns similarity' do
       arrays.each do |expected_similarity, first_arry, second_arry|
         expect(comparator.new(first_arry, second_arry).call).to eq(expected_similarity)
       end

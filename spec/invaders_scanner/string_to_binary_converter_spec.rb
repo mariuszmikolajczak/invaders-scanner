@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe InvadersScanner::StringToBinaryConverter do
-
   subject(:converter) { described_class.new(string: input) }
 
   let(:input) do
@@ -15,29 +16,34 @@ describe InvadersScanner::StringToBinaryConverter do
     "---oo-oo---\n"
   end
   let(:expected_output) do
-    %w[00100000100
-     00010001000
-     00111111100
-     01101110110
-     11111111111
-     10111111101
-     10100000101
-     00011011000]
+    %w[
+      00100000100
+      00010001000
+      00111111100
+      01101110110
+      11111111111
+      10111111101
+      10100000101
+      00011011000
+    ]
   end
 
-  it 'should convert from ascii string to bit string array' do
+  it 'converts from ascii string to bit string array' do
     expect(converter.call).to eql(expected_output)
   end
 
-  context 'unknown char found' do
+  context 'when unknown char found' do
     let(:input) { '---ooii---' }
 
-    it 'should raise exception' do
-      expect { converter.call }.to raise_error InvadersScanner::StringToBinaryConverter::UnknownCharError
+    it 'raises exception' do
+      expect { converter.call }
+        .to raise_error InvadersScanner::StringToBinaryConverter::UnknownCharError
     end
   end
 
-  context 'custom char map' do
+  context 'when custom char map' do
+    subject(:custom_converter) { described_class.new(string: input, char_map: char_map) }
+
     let(:input) do
       "qwwwqqqww\n" \
       "wwwqqwqwq\n"
@@ -52,22 +58,16 @@ describe InvadersScanner::StringToBinaryConverter do
       }
     end
 
-    subject(:custom_converter) { described_class.new(string: input, char_map: char_map) }
-
-    it 'should convert' do
+    it 'converts string' do
       expect(custom_converter.call).to eql(expected_output)
     end
 
-    context 'unexpected binary value provided' do
-      let(:char_map) do
-        {
-          'q' => '2',
-          'w' => '0'
-        }
-      end
+    context 'when unexpected binary value provided' do
+      let(:char_map) { { 'q' => '2', 'w' => '0' } }
 
-      it 'should raise exception' do
-        expect { custom_converter.call }.to raise_error InvadersScanner::StringToBinaryConverter::UnexpectedBinaryValue
+      it 'raises exception' do
+        expect { custom_converter.call }
+          .to raise_error InvadersScanner::StringToBinaryConverter::UnexpectedBinaryValue
       end
     end
   end
