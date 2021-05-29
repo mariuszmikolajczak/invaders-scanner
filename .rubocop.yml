@@ -1,0 +1,45 @@
+Layout/LineLength:
+  Max: 120
+
+Metrics/ClassLength:
+  Max: 500
+
+Metrics/ModuleLength:
+  Max: 500
+
+Metrics/CyclomaticComplexity:
+  Max: 14
+
+Metrics/PerceivedComplexity:
+  Max: 16
+
+Naming/PredicateName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+Style/MixinGrouping:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+Bundler/GemComment:
+  Enabled: false
+
+Style/Copyright:
+  Enabled: false
+
+Lint/ConstantResolution:
+  Enabled: false
+
+AllCops:
+  EnabledByDefault: true
+  SuggestExtensions: false
+  Exclude:
+    - 'spec/**/*'
+    - 'bin/*'
