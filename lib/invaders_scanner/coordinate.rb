@@ -24,6 +24,10 @@ module InvadersScanner
       Coordinate.new(x_param + other.x_param, y_param + other.y_param)
     end
 
+    def -(other)
+      Coordinate.new(x_param - other.x_param, y_param - other.y_param)
+    end
+
     # The other coordinate is smaller only when it's in first quarter based on current coordinate
     def <=>(other)
       if x_param == other.x_param && y_param == other.y_param

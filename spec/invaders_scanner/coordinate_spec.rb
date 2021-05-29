@@ -16,13 +16,20 @@ describe InvadersScanner::Coordinate do
     expect(coordinate.to_a).to eql([x, y])
   end
 
-  let(:sum_example_cord) { described_class.new(20, 21) }
+  let(:example_cord) { described_class.new(20, 14) }
 
   it 'should be able to add coordinates' do
-    result_coordinate = coordinate + sum_example_cord
+    result_coordinate = coordinate + example_cord
 
     expect(result_coordinate.x).to eql(43)
-    expect(result_coordinate.y).to eql(55)
+    expect(result_coordinate.y).to eql(48)
+  end
+
+  it 'should be able to subtract' do
+    result_coordinate = coordinate - example_cord
+
+    expect(result_coordinate.x).to eql(3)
+    expect(result_coordinate.y).to eql(20)
   end
 
   let(:base_coordinate) { described_class.new(x, y) }
