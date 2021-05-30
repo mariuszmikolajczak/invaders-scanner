@@ -35,7 +35,7 @@ matches.each do
 end
 ```
 
-## Assumptions
+## Notes
 
 - Current algorithm doesnt check partial patterns on edges, eg.
 Search pattern:
@@ -63,3 +63,7 @@ o-o-----o-o
 - Searching algorithm is based on brute force, chunks of size pattern are taken from input
 and compared, after comparing next chunk is taken if fits in area.
   
+## Development
+
+- Running tests `bundle exec rspec` generates SimpleCov report in `coverage` directory.
+- Rubocop linter `bundle exec rubocop`
