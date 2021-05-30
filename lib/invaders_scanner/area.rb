@@ -6,7 +6,7 @@ module InvadersScanner
 
     attr_reader :array_value, :min_coordinate
 
-    def self.from_string(string, converter: StringToBinaryConverter)
+    def self.from_string(string, converter: AreaConverter)
       Area.new(converter.new(string: string).call)
     end
 

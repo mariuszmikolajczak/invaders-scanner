@@ -7,5 +7,7 @@ require_relative 'invaders_scanner/area'
 require_relative 'invaders_scanner/area_comparator'
 require_relative 'invaders_scanner/scanner'
 require_relative 'invaders_scanner/match'
+require_relative 'invaders_scanner/normalizer'
+require_relative 'invaders_scanner/area_converter'
 
 module InvadersScanner; end

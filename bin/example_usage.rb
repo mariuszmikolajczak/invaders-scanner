@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
 
+# Example usage script
+
 require_relative '../lib/invaders_scanner'
 
-
-string = <<-EOT
+invader1 = <<-PATTERN
 --o-----o--
 ---o---o---
 --ooooooo--
@@ -12,20 +13,20 @@ ooooooooooo
 o-ooooooo-o
 o-o-----o-o
 ---oo-oo---
-EOT
+PATTERN
 
-candidate_string = <<-EOT
---oo----o--
--------o---
-o--oooooo--
--oo--oo--o-
-oo-oooooooo
-o-ooooooo-o
-oo-o----o-o
---ooo-oo--o
-EOT
+invader2 = <<-PATTERN
+---oo---
+--oooo--
+-oooooo-
+oo-oo-oo
+oooooooo
+--o--o--
+-o-oo-o-
+o-o--o-o
+PATTERN
 
-radar_output = <<-EOT
+radar_output = <<-PATTERN
 ----o--oo----o--ooo--ooo--o------o---oo-o----oo---o--o---------o----o------o-------------o--o--o--o-
 --o-o-----oooooooo-oooooo---o---o----o------ooo-o---o--o----o------o--o---ooo-----o--oo-o------o----
 --o--------oo-ooo-oo-oo-oo-----O------------ooooo-----oo----o------o---o--o--o-o-o------o----o-o-o--
@@ -76,14 +77,21 @@ o-----oo-------------------o--o-----o-----------o------o-------o----o-----------
 -------o---o------oooooo--o----ooo--o--------o-------o----------------------------oo-oo-o--o--------
 o--oo------o-----oo--o-oo------------oo--o------o--o-------------oo----o------------oooo-o------oo--
 -----o----------ooooooooo--------------oo--------------oo-----o-----o-o--o------o----------o----o---
-EOT
+PATTERN
 
-# puts Comparator.new(Converter.new(string: string).call, Converter.new(string: candidate_string).call).call.inspect
+invaders = {
+  invader1: InvadersScanner::Area.from_string(invader1),
+  invader2: InvadersScanner::Area.from_string(invader2)
+}
 
-# puts CountSimilarity.new(pattern_string: string, candidate_string: candidate_string).call
+whole_area = InvadersScanner::Area.from_string(radar_output)
 
-whole_area = InvadersScanner::Area.from_string(candidate_string)
-search_pattern_area = InvadersScanner::Area.from_string(string)
+invaders.each do |invader_name, invader|
+  puts "Looking for #{invader_name}"
 
-puts InvadersScanner::Scanner.new(input: whole_area, search_pattern: search_pattern_area)
-                             .scan.map { |elem| elem.inspect }
+  matches = InvadersScanner::Scanner.new(input: whole_area, search_pattern: invader, minimum_similarity: 70).scan
+  matches.each do |match|
+    cords = match.coordinates.map { |cord| "x:#{cord.x} y:#{cord.y}" }
+    puts "Found INVADER!!! at coords: start #{cords[0]} end #{cords[1]} ; similarity to pattern: #{match.similarity}"
+  end
+end
