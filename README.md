@@ -1,5 +1,7 @@
 # Invaders scanner
 
+Task description [click here](ASSIGNMENT.md).
+
 ## Usage
 
 Example script `bin/example_usage.rb` contains example patterns from the task description.
