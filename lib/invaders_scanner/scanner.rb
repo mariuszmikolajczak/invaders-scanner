@@ -2,7 +2,7 @@
 
 module InvadersScanner
   class Scanner
-    class SearchPatternToLargeError < StandardError; end
+    class SearchPatternTooLargeError < StandardError; end
 
     attr_reader :matches
 
@@ -36,7 +36,7 @@ module InvadersScanner
     end
 
     def check_params
-      raise SearchPatternToLargeError if search_pattern_area.size_coordinate > input_area.size_coordinate
+      raise SearchPatternTooLargeError if search_pattern_area.size_coordinate > input_area.size_coordinate
     end
   end
 end

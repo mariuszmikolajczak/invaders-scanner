@@ -93,7 +93,7 @@ describe InvadersScanner::Scanner do
 
     it 'raises exception' do
       expect { scanner.scan }
-        .to raise_error InvadersScanner::Scanner::SearchPatternToLargeError
+        .to raise_error InvadersScanner::Scanner::SearchPatternTooLargeError
     end
   end
 end
