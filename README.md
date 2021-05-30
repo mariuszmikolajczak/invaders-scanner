@@ -1,5 +1,7 @@
 # Invaders scanner
 
+![Rspec](https://github.com/mariuszmikolajczak/invaders-scanner/workflows/Rspec/badge.svg)
+
 Task description [click here](ASSIGNMENT.md).
 
 ## Usage
