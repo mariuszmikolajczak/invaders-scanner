@@ -72,4 +72,28 @@ describe InvadersScanner::Scanner do
       expect(scanner.scan.map(&:similarity)).to all(be > 49.9)
     end
   end
+
+  context 'when search pattern is larger then input area' do
+    let(:area_string) do
+      "--o-----o\n" \
+      "--o-o---o\n" \
+      "--o-o---o\n" \
+      '--o-----o'
+    end
+    let(:area_pattern_string) do
+      "--o-----o--\n" \
+      "---o---o---\n" \
+      "--ooooooo--\n" \
+      "-oo-ooo-oo-\n" \
+      "ooooooooooo\n" \
+      "o-ooooooo-o\n" \
+      "o-o-----o-o\n" \
+      '---oo-oo---'
+    end
+
+    it 'raises exception' do
+      expect { scanner.scan }
+        .to raise_error InvadersScanner::Scanner::SearchPatternToLargeError
+    end
+  end
 end

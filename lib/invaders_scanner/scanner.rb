@@ -2,6 +2,8 @@
 
 module InvadersScanner
   class Scanner
+    class SearchPatternToLargeError < StandardError; end
+
     attr_reader :matches
 
     DEFAULT_MINIMUM_SIMILARITY = 80
@@ -17,6 +19,7 @@ module InvadersScanner
 
     def scan
       reset_matches
+      check_params
       input_area.each_chunk(search_pattern_area.max_coordinate) do |chunk|
         similarity = comparator.new(chunk, search_pattern_area).call
         matches.push(Match.new(chunk: chunk, similarity: similarity)) if similarity > minimum_similarity
@@ -30,6 +33,10 @@ module InvadersScanner
 
     def reset_matches
       @matches = []
+    end
+
+    def check_params
+      raise SearchPatternToLargeError if search_pattern_area.size_coordinate > input_area.size_coordinate
     end
   end
 end
