@@ -39,7 +39,7 @@ end
 
 - Current algorithm doesnt check partial patterns on edges, eg.
 Search pattern:
-```
+```text
 --o-----o--
 ---o---o---
 --ooooooo--
@@ -50,7 +50,7 @@ o-o-----o-o
 ---oo-oo---
 ```
 Looking in area:
-```
+```text
 -oo-ooo-oo-
 ooooooooooo
 o-ooooooo-o
